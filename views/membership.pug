@@ -1,0 +1,8 @@
+extends layout 
+block content 
+  form(form='' method='POST')
+    label(for='passcode') Enter the secret passcode: 
+    input#passcode(type='text' name='passcode')
+    button(type='submit') Submit 
+  if error
+    p= error

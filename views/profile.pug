@@ -1,0 +1,15 @@
+extends layout 
+block content 
+  if user
+    p= user.username
+    if user.membership 
+      p Membership Status: A Member 
+    else
+      p Membership Status: Not a Member
+      p Want to be a member? Click the button below and enter the secret passphrase
+      a(href='/profile/membership')
+        button(type='button') Become a Member!
+    if user.admin 
+      p Admin Status: Admin 
+    else 
+      p Admin Status: Not an Admin

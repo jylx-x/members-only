@@ -3,3 +3,26 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
+  a(href='/sign-up')
+    button Sign-up
+  a(href='/log-in')
+    button Login
+  a(href='/log-out')
+    button Logout
+  for message in messages 
+    p=message.title
+    p=message.message
+    if user
+      p= message.user
+    else
+      p Anonymous 
+    p= message.timestamp
+    if (user && user.admin)
+      form(action='/message-delete' method='POST')
+        input(type='hidden' name='messageID' value=message._id)
+        button(type='submit') Delete
+  if user 
+    a(href='/create-new-message')
+      button Create Message 
+    a(href='/profile')
+      button Profile
