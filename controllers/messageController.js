@@ -1,15 +1,17 @@
-const { response, request } = require('express');
 const { body, validationResult } = require('express-validator');
-const message = require('../models/message.js');
+
+const {format} = require('date-fns');
 
 var Message = require('../models/message.js');
 
 exports.message_list = function (req, res) {
-  Message.find({}, (err, results) => {
+  Message.find({}).sort({timestamp: 'desc'}).exec((err, results) => {
     if (err) return next(err);
     res.render('index', {
       user: req.user,
       messages: results,
+      // timestap: results.timestamp,
+      // timestamp: format(new Date(results.timestamp), 'PPpp')
     });
   });
 };
@@ -19,8 +21,8 @@ exports.message_create_get = function (req, res) {
 };
 
 exports.message_create_post = [
-  body('title').trim().escape(),
-  body('message').trim().escape(),
+  body('title').trim(),
+  body('message').trim(),
   (req, res, next) => {
     const errors = validationResult(req);
 
@@ -36,6 +38,7 @@ exports.message_create_post = [
         message: req.body.message,
         user: res.locals.currentUser.username,
         timestamp: new Date(),
+        timestampFormatted: format(new Date(), 'PPpp'),
       });
       message.save(function (err) {
         if (err) {

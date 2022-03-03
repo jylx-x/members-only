@@ -1,15 +1,33 @@
 extends layout 
-block content 
-  if user
-    p= user.username
-    if user.membership 
-      p Membership Status: A Member 
-    else
-      p Membership Status: Not a Member
-      p Want to be a member? Click the button below and enter the secret passphrase
-      a(href='/profile/membership')
-        button(type='button') Become a Member!
-    if user.admin 
-      p Admin Status: Admin 
-    else 
-      p Admin Status: Not an Admin
+block content
+  main
+    div.container.d-flex.flex-column.align-items-center
+      if user
+        i.bi.bi-person-circle.color(style='font-size: 160px')
+        p.fs-1= user.username
+        div.bg-color.text-center.p-4.rounded.w-50
+          if user.membership 
+            p.fs-3.m-0 Membership Status
+            div.mb-4 A Member 
+            if user.admin 
+              p.fs-3.m-0 Admin Status
+              div Admin 
+            else 
+              p.fs-3.m-0 Admin Status
+              div Not an Admin
+          else
+            p.fs-3.m-0 Membership Status
+            div.mb-4 Not a Member
+            if user.admin 
+              p.fs-3.m-0 Admin Status
+              div Admin 
+            else 
+              p.fs-3.m-0 Admin Status
+              div Not an Admin
+            hr
+            div.container.text-center
+              p Want to be a member? Click the button below and enter the secret passphrase
+              a(href='/profile/membership')
+                button.btn.btn-sm.btn-light(type='button') Become a Member!
+        a(href='/log-out')
+          button.btn.text-white.mt-5(style='background-color: #984fd4') Logout

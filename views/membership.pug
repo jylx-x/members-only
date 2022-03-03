@@ -1,8 +1,11 @@
 extends layout 
-block content 
-  form(form='' method='POST')
-    label(for='passcode') Enter the secret passcode: 
-    input#passcode(type='text' name='passcode')
-    button(type='submit') Submit 
-  if error
-    p= error
+block content
+  main
+    div.container.bg-color.p-5.rounded
+      form(form='' method='POST')
+        label.form-label(for='passcode') Enter the secret passcode: 
+        input#passcode.form-control(type='text' name='passcode')
+        if error
+          p.text-danger.mt-2= error
+        div.d-flex.justify-content-center.mt-4
+          button.btn.btn-outline-light(type='submit') Submit 

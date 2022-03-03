@@ -1,8 +1,24 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: 'Didact Gothic', sans-serif;
 }
 
-a {
-  color: #00B7FF;
+nav.navbar {
+  background-color: #984fd4
+}
+
+.white {
+  color: white;
+}
+
+.color {
+  color: #984fd4;
+}
+
+.bg-color {
+  background-color: #984fd4;
+  color: white;
+}
+
+.msg-container {
+  border: 1px solid #984fd4;
 }

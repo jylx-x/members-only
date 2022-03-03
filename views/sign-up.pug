@@ -1,20 +1,31 @@
 extends layout 
 
 block content
-  h1 Sign Up 
-  form(form='' method='POST')
-    label(for='first-name') First Name: 
-    input#first-name(type='text' name='first_name' value=(undefined===user ? '' : user.first_name))
-    label(for='last-name') Last Name: 
-    input#last-name(type='text' name='last_name' value=(undefined===user ? '' : user.last_name))
-    label(for='username') Username: 
-    input#username(type='text' name='username' required='true' value=(undefined===user ? '' : user.username))
-    label(for='password') Password: 
-    input#password(type='password' name='password' required='true')
-    label(for='confirm-password') Confirm Password: 
-    input#confirm-password(type='password' name='password-confirm' required='true')
-    button(type='submit') Submit
-  if errors 
-    ul
-      for error in errors 
-        li!= error.msg
+  main
+    div.container
+      h1 Sign Up 
+      form(form='' method='POST')
+        div.row
+          h5.mt-4 Full Name
+          div.col-md-6.form-floating.mb-3
+            input.form-control#first-name(type='text' name='first_name' placeholder='First Name' value=(undefined===user ? '' : user.first_name))
+            label.form-label.ps-4(for='first-name') First Name (Optional)
+          div.form-floating.mb-3.col-md-6
+            input.form-control#last-name(type='text' name='last_name' placeholder='Last Name' value=(undefined===user ? '' : user.last_name))
+            label.form-label.ps-4(for='last-name') Last Name (Optional)
+          h5.mt-3 Account
+          div.form-floating.mb-3
+            input.form-control#username(type='text' name='username' required='true' placeholder='Username' value=(undefined===user ? '' : user.username))
+            label.form-label.ps-4(for='username') Username
+          div.form-floating.mb-3 
+            input.form-control#password(type='password' name='password' required='true' placeholder='Password')
+            label.form-label.ps-4(for='password') Password
+          div.form-floating.mb-3 
+            input.form-control#confirm-password(type='password' name='password-confirm' required='true' placeholder='Confirm Password')
+            label.form-label.ps-4(for='confirm-password') Confirm Password 
+        if errors 
+          for error in errors 
+            li.mt-3.text-danger= error.msg
+        div.d-flex.justify-content-center.mt-4
+          button.btn.text-white.text-center(type='submit' style='background-color: #984fd4') Create Account
+      

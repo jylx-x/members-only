@@ -1,28 +1,27 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
-  a(href='/sign-up')
-    button Sign-up
-  a(href='/log-in')
-    button Login
-  a(href='/log-out')
-    button Logout
-  for message in messages 
-    p=message.title
-    p=message.message
-    if user
-      p= message.user
-    else
-      p Anonymous 
-    p= message.timestamp
-    if (user && user.admin)
-      form(action='/message-delete' method='POST')
-        input(type='hidden' name='messageID' value=message._id)
-        button(type='submit') Delete
-  if user 
-    a(href='/create-new-message')
-      button Create Message 
-    a(href='/profile')
-      button Profile
+  main.m-5
+    div.container
+      h1 Latest Messages
+      if user 
+        a(href='/create-new-message')
+          button.btn.text-white(style='background-color: #984fd4') Create Message 
+      div.mt-3  
+        for message in messages
+          div.msg-container.rounded.mt-4
+            div.p-2
+              h4=message.title
+              p=message.message
+            div.bg-color.m-0.d-flex.justify-content-between.align-items-center.p-2
+              if user
+                div= 'Posted by: ' + message.user
+              else
+                div Posted by: Anonymous
+              div.d-flex.align-items-center
+                div= message.timestampFormatted
+                if (user && user.admin)
+                  form(action='/message-delete' method='POST')
+                    input(type='hidden' name='messageID' value=message._id)
+                    button.btn(type='submit')
+                      i.bi.bi-trash(style='color: white')

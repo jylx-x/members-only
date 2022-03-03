@@ -8,6 +8,7 @@ var MessageSchema = new Schema(
     title: String,
     message: String,
     timestamp: Date,
+    timestampFormatted: String
   }
 )
 

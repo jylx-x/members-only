@@ -33,6 +33,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/public', express.static(path.join(__dirname, 'public')));
 
 // Passport stuff
 passport.use(
@@ -65,7 +66,7 @@ passport.deserializeUser(function (id, done) {
   });
 });
 
-app.use(session({ secret: process.env.Session, resave: false, saveUninitialized: true }));
+app.use(session({ secret: process.env.Session, resave: false, saveUninitialized: false}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.urlencoded({ extended: true }));
